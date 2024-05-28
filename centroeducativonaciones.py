@@ -2,6 +2,7 @@ from graphviz import Digraph
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
+import os
 
 class Estudiante:
     def __init__(self, student_id, name, phone):
@@ -186,8 +187,11 @@ class EstudianteApp:
             self.listbox_students.insert(tk.END, f"ID: {student_id}, Nombre: {name}, Telefono: {phone}")
 
     def visualize_bst(self):
-        self.bst.generate_dot('ABB')
-        self.display_image('ABB.png')
+        try:
+            self.bst.generate_dot('ABB')
+            self.display_image('ABB.png')
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo generar la imagen: {str(e)}")
 
     def display_image(self, filename):
         try:
